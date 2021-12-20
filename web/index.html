@@ -154,8 +154,28 @@
                     temperature.dataset.value = tempvalue + units[config.unit];
                     temperature.style.height = (tempvalue - config.minTemp) / (config.maxTemp - config.minTemp) * 100 + "%";
                 }
-                
 			}
+
+            function updateTemperature(){
+                var xmlhttp;
+                if (window.XMLHttpRequest){
+                    xmlhttp=new XMLHttpRequest();
+                }
+                else{
+                    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                };
+                xmlhttp.onreadystatechange=function(){
+                    if (xmlhttp.readyState==4 && xmlhttp.status==200){
+                        setTemperature(xmlhttp.responseText);
+                    }
+                };
+                xmlhttp.open("GET","/status",true);
+                xmlhttp.send();
+            }
+            
+            window.onload=function(){ 
+                setInterval("updateTemperature()",1000);
+            }
 		</script>
 	</body>
 
