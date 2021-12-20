@@ -117,188 +117,16 @@
                 left: 100%;
                 top: calc(-1em / 2.2 + 5px);
 			}
-
-			#playground {
-                font-size: 1.1em;
-			}
-			#playground #range {
-                display: flex;
-			}
-			#playground #range input[type=text] {
-                width: 2em;
-                background: transparent;
-                border: none;
-                color: inherit;
-                font: inherit;
-                margin: 0 5px;
-                padding: 0px 5px;
-                border-bottom: 2px solid transparent;
-                transition: all 0.2s ease-in-out;
-			}
-			#playground #range input[type=text]:focus {
-                border-color: #3dcadf;
-                outline: none;
-			}
-			#playground #range input[type=text]:first-child {
-                text-align: right;
-			}
-			#playground #unit {
-                width: 100%;
-                margin: 0;
-                text-align: center;
-			}
-			#playground #unit:hover {
-                cursor: pointer;
-			}
-
-			input[type=range] {
-                -webkit-appearance: none;
-                background: transparent;
-                margin: 5.5px 0;
-                width: 100%;
-			}
-			input[type=range]::-moz-focus-outer {
-			    border: 0;
-			}
-			input[type=range]:hover {
-			    cursor: pointer;
-			}
-			input[type=range]:focus {
-			    outline: 0;
-			}
-			input[type=range]:focus::-webkit-slider-runnable-track {
-			    background: #313137;
-			    border-color: #313137;
-			}
-			input[type=range]:focus::-ms-fill-lower {
-                background: #2a2a2e;
-			}
-			input[type=range]:focus::-ms-fill-upper {
-                background: #313137;
-                border-color: #313137;
-			}
-			input[type=range]::-webkit-slider-runnable-track {
-                cursor: default;
-                height: 10px;
-                transition: all 0.2s ease;
-                width: 100%;
-                cursor: pointer;
-                transition: all 0.2s ease-in-out;
-                box-shadow: 1px 1px 1px transparent, 0 0 1px rgba(13, 13, 13, 0);
-                background: #2a2a2e;
-                border: 2px solid #2a2a2e;
-                border-radius: 5px;
-			}
-			input[type=range]::-webkit-slider-thumb {
-                box-shadow: 4px 4px 4px transparent, 0 0 4px rgba(13, 13, 13, 0);
-                background: #3dcadf;
-                border: 0px solid #3d3d44;
-                border-radius: 12px;
-                cursor: pointer;
-                height: 11px;
-                width: 18px;
-                -webkit-appearance: none;
-                margin-top: -2.5px;
-			}
-			input[type=range]::-moz-range-track {
-                box-shadow: 1px 1px 1px transparent, 0 0 1px rgba(13, 13, 13, 0);
-                cursor: default;
-                height: 10px;
-                transition: all 0.2s ease;
-                width: 100%;
-                cursor: pointer;
-                transition: all 0.2s ease-in-out;
-                background: #2a2a2e;
-                border: 2px solid #2a2a2e;
-                border-radius: 5px;
-                height: 5px;
-			}
-			input[type=range]::-moz-range-thumb {
-                box-shadow: 4px 4px 4px transparent, 0 0 4px rgba(13, 13, 13, 0);
-                background: #3dcadf;
-                border: 0px solid #3d3d44;
-                border-radius: 12px;
-                cursor: pointer;
-                height: 7px;
-                width: 14px;
-			}
-			input[type=range]::-ms-track {
-                cursor: default;
-                height: 10px;
-                transition: all 0.2s ease;
-                width: 100%;
-                cursor: pointer;
-                transition: all 0.2s ease-in-out;
-                background: transparent;
-                border-color: transparent;
-                border-width: 5.5px 0;
-                color: transparent;
-			}
-			input[type=range]::-ms-fill-lower {
-                box-shadow: 1px 1px 1px transparent, 0 0 1px rgba(13, 13, 13, 0);
-                background: #222226;
-                border: 2px solid #2a2a2e;
-                border-radius: 10px;
-			}
-			input[type=range]::-ms-fill-upper {
-                box-shadow: 1px 1px 1px transparent, 0 0 1px rgba(13, 13, 13, 0);
-                background: #2a2a2e;
-                border: 2px solid #2a2a2e;
-                border-radius: 10px;
-			}
-			input[type=range]::-ms-thumb {
-                box-shadow: 4px 4px 4px transparent, 0 0 4px rgba(13, 13, 13, 0);
-                background: #3dcadf;
-                border: 0px solid #3d3d44;
-                border-radius: 12px;
-                cursor: pointer;
-                height: 7px;
-                width: 14px;
-                margin-top: 2.5px;
-			}
-			input[type=range]:disabled::-webkit-slider-thumb {
-			    cursor: not-allowed;
-			}
-			input[type=range]:disabled::-moz-range-thumb {
-			    cursor: not-allowed;
-			}
-			input[type=range]:disabled::-ms-thumb {
-			    cursor: not-allowed;
-			}
-			input[type=range]:disabled::-webkit-slider-runnable-track {
-			    cursor: not-allowed;
-			}
-			input[type=range]:disabled::-ms-fill-lower {
-			    cursor: not-allowed;
-			}
-			input[type=range]:disabled::-ms-fill-upper {
-			    cursor: not-allowed;
-			}
 		</style>
 	</head>
 	<body>
 		<div id="wrapper">
 			<div id="termometer">
-				<div id="temperature" style="height:0" data-value="0°C">
-				</div>
-				<div id="graduations">
-				</div>
+				<div id="temperature" data-value="0°C"></div>
+				<div id="graduations"></div>
 			</div>
-			<div id="playground" style="display:none">
-				<div id="range">
-					<input id="minTemp" type="text" value="35">
-					<input type="range" min="35" max="42" step="0.1" value="37.5">
-					<input id="maxTemp" type="text" value="42">
-				</div>
-				<p id="unit">
-					Celcius C°
-				</p>
-			</div>
-			<p id="info" style="display:none">
-				Click on the values to change them!
-			</p>
 		</div>
-		<!-- partial -->
+		<!-- Javascript Coding Started -->
 		<script>
 			const units = {
 				Celcius: "°C",
@@ -311,34 +139,23 @@
 				unit: "Celcius"
 			};
 
-			// Change min and max temperature values
-			const tempValueInputs = document.querySelectorAll("input[type='text']");
-
-			tempValueInputs.forEach(input => {
-				input.addEventListener("change", event => {
-					const newValue = event.target.value;
-
-					if (isNaN(newValue)) {
-						return input.value = config[input.id];
-					} else {
-						config[input.id] = input.value;
-						range[input.id.slice(0, 3)] = config[input.id]; // Update range
-						return setTemperature(); // Update temperature
-					}
-				});
-			});
-
-			// Change temperature
-			const range = document.querySelector("input[type='range']");
 			const temperature = document.getElementById("temperature");
 
-			function setTemperature() {
-				temperature.style.height = (range.value - config.minTemp) / (config.maxTemp - config.minTemp) * 100 + "%";
-				temperature.dataset.value = range.value + units[config.unit];
+			function setTemperature(tempvalue) {
+                if(tempvalue<=config.minTemp){
+                    temperature.dataset.value = tempvalue + units[config.unit];
+                    tempvalue = config.minTemp;
+                    temperature.style.height = (tempvalue - config.minTemp) / (config.maxTemp - config.minTemp) * 100 + "%";
+                }else if(tempvalue >= config.maxTemp){
+                    temperature.dataset.value = tempvalue + units[config.unit];
+                    tempvalue = config.maxTemp;
+                    temperature.style.height = (tempvalue - config.minTemp) / (config.maxTemp - config.minTemp) * 100 + "%";
+                }else{
+                    temperature.dataset.value = tempvalue + units[config.unit];
+                    temperature.style.height = (tempvalue - config.minTemp) / (config.maxTemp - config.minTemp) * 100 + "%";
+                }
+                
 			}
-
-			range.addEventListener("input", setTemperature);
-			setTimeout(setTemperature, 1000);
 		</script>
 	</body>
 
