@@ -40,10 +40,11 @@ void setup() {
 }
 
 void loop() {
-  server.handleClient();
-  if(mlx.readObjectTempC()>34){
+  if(mlx.readObjectTempC()>25){
     digitalWrite(D8, HIGH);
-  }else{
+  }else if(mlx.readObjectTempC()<=25){
     digitalWrite(D8, LOW);
   }
+  server.handleClient();
+  delay(100);
 }
