@@ -359,7 +359,26 @@
                 xmlhttp.send(data);
             }
 
+            function getSetTemperature(){
+                var xmlhttp;
+                if (window.XMLHttpRequest){
+                    xmlhttp=new XMLHttpRequest();
+                }
+                else{
+                    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                };
+                xmlhttp.onreadystatechange=function(){
+                    if (xmlhttp.readyState==4 && xmlhttp.status==200){
+                        document.querySelector("#range > input[type=range]:nth-child(2)").value = xmlhttp.responseText;
+                        document.querySelector("#setTemp").innerText = xmlhttp.responseText;
+                    }
+                };
+                xmlhttp.open("GET","/getTemp",true);
+                xmlhttp.send();
+            }
+
             window.onload=function(){
+                getSetTemperature();
                 setInterval("updateTemperature()",1000);
             }
 		</script>
