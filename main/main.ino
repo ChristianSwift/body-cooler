@@ -26,9 +26,8 @@ void handleHistory() {
 }
 
 void handleStatus() {
-//  while(String(mlx.readObjectTempC()+3.5)=="nan");
-//  server.send(200, "text/plain", String(mlx.readObjectTempC()+3.5));
-  server.send(200, "text/plain", String(38.5));
+  while(String(mlx.readObjectTempC()+3.5)=="nan");
+  server.send(200, "text/plain", String(mlx.readObjectTempC()+3.5));
 }
 
 void handleGetTemp() {
@@ -49,9 +48,9 @@ void handleSetTemp() {
 }
 
 void setup() {
-//  if (!mlx.begin()) {
-//    while (1);
-//  };
+  if (!mlx.begin()) {
+    while (1);
+  };
   delay(1000);
   pinMode(D8, OUTPUT);
   WiFi.softAP(ssid, password);
@@ -67,11 +66,11 @@ void setup() {
 }
 
 void loop() {
-//  if(mlx.readObjectTempC()+3.5 >= setTemperature){
-//    digitalWrite(D8, HIGH);
-//  }else if(mlx.readObjectTempC()+3.5 < setTemperature){
-//    digitalWrite(D8, LOW);
-//  }
+  if(mlx.readObjectTempC()+3.5 >= setTemperature){
+    digitalWrite(D8, HIGH);
+  }else if(mlx.readObjectTempC()+3.5 < setTemperature){
+    digitalWrite(D8, LOW);
+  }
   server.handleClient();
   delay(100);
 }
