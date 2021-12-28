@@ -166,21 +166,35 @@
 </script>
 <script>
   google.charts.load('current', {'packages':['corechart']});
-  google.charts.setOnLoadCallback(drawChart);
-  function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-      ['Time', 'Forehead Temperature'],
-      ['-9 min',  38.5],
-      ['-8 min',  38.3],
-      ['-7 min',  38.2],
-      ['-6 min',  38.1],
-      ['-5 min',  38.0],
-      ['-4 min',  37.9],
-      ['-3 min',  37.7],
-      ['-2 min',  37.6],
-      ['-1 min',  37.5],
-      ['-0 min',  37.5],
-    ]);
+  function getHistoryData(){
+    var xmlhttp;
+    if (window.XMLHttpRequest){
+        xmlhttp=new XMLHttpRequest();
+    }
+    else{
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    };
+    xmlhttp.onreadystatechange=function(){
+        if (xmlhttp.readyState==4 && xmlhttp.status==200){
+            var data = JSON.parse(xmlhttp.responseText);
+            drawChart(data);
+        }
+    };
+    xmlhttp.open("GET","/historydata",true);
+    xmlhttp.send();
+  }
+  function drawChart(gaindata) {
+    for (var i = gaindata.length-1; i > -1; i--) {
+      gaindata[i+1] = parseFloat(gaindata[i]);
+    }
+    for (var i = 0; i < gaindata.length; i++) {
+      if (i==0){
+        gaindata[i] = ['Time', 'Forehead Temperature'];
+      }else{
+        gaindata[i] = [(i-gaindata.length)+' min', gaindata[i]];
+      }
+    }
+    var data = google.visualization.arrayToDataTable(gaindata);
     var options = {
       title: 'Forehead Temperature Gradient',
       titleTextStyle: {
@@ -211,9 +225,10 @@
     var chart = new google.visualization.LineChart(document.getElementById('curve-chart'));
     chart.draw(data, options);
   }
-  $(document).resize(function(){
-    drawChart()
-  })
+  
+  window.onload=function(){
+    getHistoryData();
+  }
 </script>
 
 </body>

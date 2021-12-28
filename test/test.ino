@@ -4,6 +4,7 @@
 #include <Arduino_JSON.h>
 #include <Adafruit_MLX90614.h>
 #include <FS.h>
+#include "operateFile.h"
 
 //Adafruit_MLX90614 mlx = Adafruit_MLX90614();
 
@@ -55,8 +56,6 @@ void handleSetTemp() {
     for (uint8_t i = 0; i < server.args(); i++) {
       if (server.argName(i)=="temp"){
         setTemperature = server.arg(i).toFloat();
-      } else if (server.argName(i)=="save"){
-        
       }
     }
     server.send(200, "text/plain", String(setTemperature));
@@ -64,6 +63,7 @@ void handleSetTemp() {
 }
 
 void setup() {
+  Serial.begin(115200);
   SPIFFS.begin();
 //  if (!mlx.begin()) {
 //    while (1);
@@ -89,12 +89,24 @@ void loop() {
 //  }else if(mlx.readObjectTempC()+3.5 < setTemperature){
 //    digitalWrite(D8, LOW);
 //  }
-  if(count == 100){
-    File file = SPIFFS.open("/index.html","w");
-    const char input[] = "[36.5,37.5,38.5]";
-    file = JSON.parse(input);
-    file.close();
-    //执行写入值
+  if(count == 50){
+    Serial.println("Record begin");
+    JSONVar recordList = JSON.parse(fileRead("/record"));
+    Serial.println(recordList);
+    if(recordList.length()>=10){
+      for(int i=0;i<recordList.length();i++){
+        if(i<recordList.length()-1){
+          recordList[i]=(double)recordList[i+1];
+        }else{
+          recordList[i]=37.5;
+//          recordList[i]=mlx.readObjectTempC()+3.5;
+        }
+      }
+    }else{
+      recordList[recordList.length()]=36.5;
+//      recordList[recordList.length()]=mlx.readObjectTempC()+3.5;
+    }
+    fileWrite("/record",JSON.stringify(recordList)+"\n");
     count = 0;
   }
   server.handleClient();
