@@ -150,6 +150,14 @@
 			#playground #unit:hover {
                 cursor: pointer;
 			}
+            #playground #history {
+                width: 100%;
+                margin: 0;
+                text-align: center;
+			}
+			#playground #history:hover {
+                cursor: pointer;
+			}
             #range span {
                 font-size: 1.1em;
                 margin: 0 5px;
@@ -296,6 +304,9 @@
 				</div>
 				<p id="unit">
 					设定温度：<span id="setTemp">37.5</span>°C
+				</p>
+                <p id="history" onclick="window.location.href='/history'">
+					查看历史温度曲线
 				</p>
 			</div>
 		</div>
